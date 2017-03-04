@@ -81,4 +81,25 @@ public class Bus {
 		return resp;
 		
 	}
+	
+	public JSONObject send(int senderId, Message m) {
+		boolean err = true;
+		synchronized(sensors) {
+			Sensor s = sensors.get(senderId-1);
+			if(s != null) {
+				s.addMsg(m);
+				err = false;
+			}
+		}
+		JSONObject ack = new JSONObject();
+		if(err) {
+			ack.put("resp", "error");
+		} else {
+			ack.put("resp", "ok");
+		}
+		JSONObject resp = new JSONObject();
+		resp.put("type", "send");
+		resp.put("ack", ack);
+		return resp;
+	}
 }
