@@ -8,7 +8,7 @@ public class MainAppServer {
 
 	public static void main(String[] args) {
 				try {
-					//Création d'un socket serveur écoutant sur le port 1025
+					//Création d'un socket serveur écoutant sur le port 7182
 					ServerSocket server = new ServerSocket(7182);
 					while(true) {
 						Socket c = server.accept();
