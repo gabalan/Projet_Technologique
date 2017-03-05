@@ -60,6 +60,19 @@ public class RequestHandler {
 					m.timestamp = d.getTime();
 					resp = Bus.getInstance().send(sender_id,m);
 				}
+			} else if(JSONrequest.getString("type").equals("get_last")) {
+				System.out.println("get_last");
+				
+				int sender_id = -1; 
+				if(! JSONrequest.isNull("sender_id")) {
+					sender_id = JSONrequest.getInt("sender_id");
+					resp = Bus.getInstance().get_last(sender_id);
+				}else {
+					resp.put("type", "get_last");
+					resp.put("ack",error(401));
+				}
+				
+				
 			}
 		}
 		

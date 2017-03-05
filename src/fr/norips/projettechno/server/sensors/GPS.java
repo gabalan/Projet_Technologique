@@ -52,7 +52,7 @@ public class GPS implements Sensor{
 	@Override
 	public synchronized Message getLastMsg() {
 		// TODO Auto-generated method stub
-		return bufList[currentMsgId%MSG_BUFFER_SIZE];
+		return bufList[currentMsgId-1%MSG_BUFFER_SIZE];
 	}
 
 	@Override
@@ -69,6 +69,7 @@ public class GPS implements Sensor{
 
 	@Override
 	public synchronized void addMsg(Message msg) {
+		msg.mId = currentMsgId;
 		bufList[currentMsgId++%MSG_BUFFER_SIZE] = msg;
 	}
 

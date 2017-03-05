@@ -102,4 +102,27 @@ public class Bus {
 		resp.put("ack", ack);
 		return resp;
 	}
+	
+	public JSONObject get_last(int senderId) {
+		JSONObject resp = null;
+		synchronized(sensors) {
+			Sensor s = sensors.get(senderId-1);
+			if(s != null) {
+				resp = Message.toJson(s.getLastMsg());
+			}
+		}
+		JSONObject ack = new JSONObject();
+		//Sensor not found
+		if(resp == null) {
+			resp = new JSONObject();
+			ack.put("resp", "error");
+			resp.put("ack", ack);
+			return resp;
+		} else {
+			ack.put("resp", "ok");
+		}
+		resp.put("type", "get_last");
+		resp.put("ack",ack);
+		return resp;
+	}
 }

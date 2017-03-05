@@ -12,4 +12,7 @@ public interface Sensor {
 		public Message getLastMsg();
 		public Message getMsg(int msg_id);
 		public JSONObject toJson();
+		
+		
+
 }
