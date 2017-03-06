@@ -20,12 +20,19 @@ public class ClientHandler implements Runnable {
 			System.out.println("Un client se connecte");
 			PrintWriter w = new PrintWriter(s.getOutputStream(),true);
 			BufferedReader i = new BufferedReader(new InputStreamReader(s.getInputStream())); 
-			
-			String input = i.readLine();
-			System.out.println("Read msg :" + input);
-			RequestHandler req = new RequestHandler(input);
-			
-			w.println(req.execute());
+			while(true) {
+				try {
+
+					String input = i.readLine();
+					//System.out.println("Read msg :" + input);
+					RequestHandler req = new RequestHandler(input);
+					
+					w.println(req.execute());
+				} catch (IOException e) {
+					e.printStackTrace();
+					break;
+				}
+			}
 			
 			w.close();
 			s.close();

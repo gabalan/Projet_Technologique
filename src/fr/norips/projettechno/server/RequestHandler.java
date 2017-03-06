@@ -19,9 +19,14 @@ public class RequestHandler {
 				String name = JSONrequest.getString("sender_name");
 				String clas = JSONrequest.getString("sender_class");
 				Sensor s = null;
-				if(clas.equals(GPS.className)) {
+				if(clas.equals("GPS")) {
 					s = new GPS(name);
 					resp = Bus.getInstance().register(s);
+				} else if (clas.equals("Gyroscope")) {
+					s = new Gyro(name);
+					resp = Bus.getInstance().register(s);
+				} else if (clas.equals("Accelerometer")) {
+					
 				}
 			} else if(JSONrequest.getString("type").equals("list")) {
 				System.out.println("List");
@@ -42,7 +47,7 @@ public class RequestHandler {
 				
 				resp = Bus.getInstance().list(clas,name);
 			} else if(JSONrequest.getString("type").equals("send")) {
-				System.out.println("Send");
+				//System.out.println("Send");
 				
 				int sender_id; 
 				if(JSONrequest.isNull("sender_id")) {
@@ -61,7 +66,7 @@ public class RequestHandler {
 					resp = Bus.getInstance().send(sender_id,m);
 				}
 			} else if(JSONrequest.getString("type").equals("get_last")) {
-				System.out.println("get_last");
+				//System.out.println("get_last");
 				
 				int sender_id = -1; 
 				if(! JSONrequest.isNull("sender_id")) {

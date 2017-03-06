@@ -1,12 +1,11 @@
 package fr.norips.projettechno.server.sensors;
 
-public class GPS extends Sensor {
+public class Gyro extends Sensor {
 	private String className;
-	public GPS(String name) {
+	public Gyro(String name) {
 		super(name);
-		className = "GPS";
+		className = "Gyro";
 	}
-	
 	@Override
 	public String getClassName() {
 		return className;
