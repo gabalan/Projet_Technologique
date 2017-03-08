@@ -57,8 +57,8 @@ public class ClientBus implements Runnable {
 					JSONObject response = new JSONObject(i.readLine());
 					synchronized(glListener) {
 						glListener.angleX = response.getJSONObject("contents").getDouble("x");
-						glListener.angleY = response.getJSONObject("contents").getDouble("y");
-						glListener.angleZ = response.getJSONObject("contents").getDouble("z");
+						glListener.angleY = -response.getJSONObject("contents").getDouble("y");
+						glListener.angleZ = -response.getJSONObject("contents").getDouble("z");
 					}
 					long dateMsg = response.getLong("date");
 					Date d = new Date();

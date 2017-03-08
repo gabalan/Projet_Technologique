@@ -14,6 +14,8 @@ import java.util.Enumeration;
 
 import org.json.JSONObject;
 
+import fr.norips.busAPI.*;
+
 public class Driver implements SerialPortEventListener {
 
 	SerialPort serialPort;
@@ -38,11 +40,11 @@ public class Driver implements SerialPortEventListener {
 	private static final int DATA_RATE = 57600;
 	
 	private int senderId;
-	Socket client;
+	
 	private String name;
 	private String url;
-	private PrintWriter w;
-	private BufferedReader i;
+	private Bus bus = null;
+	private Capteur c = null;
 	
 	public Driver(String _url, String _name) {
 		name = _name;
@@ -73,19 +75,8 @@ public class Driver implements SerialPortEventListener {
 		}
 		
 		try {
-			client = new Socket(url, 7182);
-			w = new PrintWriter(client.getOutputStream(),true);
-			w.flush();
-			i = new BufferedReader(new InputStreamReader(client.getInputStream()));
-			
-			JSONObject request = new JSONObject();
-			request.put("type", "register");
-			request.put("sender_name", name);
-			request.put("sender_class", "Gyroscope");
-			w.println(request);
-			JSONObject resp = new JSONObject(i.readLine());
-			System.out.println(resp);
-			senderId = resp.getInt("sender_id");
+			bus = new Bus(url,7182);
+			c = new Capteur("Gyroscope",name,bus);
 			
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
@@ -149,9 +140,7 @@ public class Driver implements SerialPortEventListener {
 							}
 						}
 					}
-					send.put("contents", contents);
-					w.println(send);
-					w.flush();
+					c.send(contents);
 				
 				//System.out.println(i.readLine());
 			} catch (Exception e) {
