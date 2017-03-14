@@ -47,7 +47,7 @@ public class RequestHandler {
 				
 				resp = Bus.getInstance().list(clas,name);
 			} else if(JSONrequest.getString("type").equals("send")) {
-				//System.out.println("Send");
+				System.out.println("Send");
 				
 				int sender_id; 
 				if(JSONrequest.isNull("sender_id")) {

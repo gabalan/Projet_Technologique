@@ -165,7 +165,7 @@ public class MainWindow {
 
 		
 		JPanel panel_accel = new JPanel();
-		//panelOne.add(glCanvas);
+		panelOne.add(glCanvas);
 		panelOne.add(panel_accel);
 		panel_accel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
