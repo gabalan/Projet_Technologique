@@ -31,6 +31,8 @@ import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.FPSAnimator;
 
+import fr.norips.busAPI.Bus;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -41,6 +43,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -95,8 +98,16 @@ public class MainWindow {
         GLCanvas glCanvas = new GLCanvas(glCapabilities);
         glCanvas.setMinimumSize(new Dimension(300, 50));
         MyGLEventListener glListener = new MyGLEventListener(); 
+        Bus b;
+		try {
+			b = new Bus(url);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
+		}
         
-        new Thread(new ClientBus(url, glListener)).start();
+        new Thread(new ClientBusGyro(b, glListener)).start();
         
         
         glCanvas.addMouseMotionListener(glListener);
@@ -337,6 +348,7 @@ public class MainWindow {
 		MapClickListenerLabel sa = new MapClickListenerLabel(mapViewer,lblLat,lblLong,defaultWaypoint); 
 		mapViewer.addMouseListener(sa); 
 		mapViewer.addMouseMotionListener(sa); 
+		new Thread(new ClientBusGPS(b, defaultWaypoint)).start();
         
         
         frame.setMinimumSize(new Dimension(600, 500));

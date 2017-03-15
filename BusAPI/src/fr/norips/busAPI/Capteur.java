@@ -50,7 +50,7 @@ public class Capteur {
 		last_message_id = response.getInt("msg_id");
 		Message m = new Message();
 		m.mId = last_message_id;
-		m.timestamp = response.getInt("date");
+		m.timestamp = response.getLong("date");
 		m.msg = response.getJSONObject("contents");
 		return m;
 	}
@@ -64,7 +64,7 @@ public class Capteur {
 		last_message_id = response.getInt("msg_id");
 		Message m = new Message();
 		m.mId = last_message_id;
-		m.timestamp = response.getInt("date");
+		m.timestamp = response.getLong("date");
 		m.msg = response.getJSONObject("contents");
 		last_message_id++;
 		return m;
@@ -72,14 +72,13 @@ public class Capteur {
 	
 	public Message getLast() {
 		JSONObject request = new JSONObject();
-		request.put("type", "get");
+		request.put("type", "get_last");
 		request.put("sender_id",sender_id);
-		request.put("msg_id",last_message_id);
 		JSONObject response = bus.request(request);
 		last_message_id = response.getInt("msg_id");
 		Message m = new Message();
 		m.mId = last_message_id;
-		m.timestamp = response.getInt("date");
+		m.timestamp = response.getLong("date");
 		m.msg = response.getJSONObject("contents");
 		return m;
 	}

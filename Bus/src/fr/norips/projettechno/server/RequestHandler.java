@@ -30,7 +30,6 @@ public class RequestHandler {
 				}
 			} else if(JSONrequest.getString("type").equals("list")) {
 				System.out.println("List");
-				
 				String name; 
 				if(JSONrequest.isNull("sender_name")) {
 					name = null;

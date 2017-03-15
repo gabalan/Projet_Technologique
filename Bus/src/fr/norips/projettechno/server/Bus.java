@@ -50,17 +50,17 @@ public class Bus {
 		JSONArray results = new JSONArray();
 		synchronized(sensors) {
 			if(clas == null && name != null) {
-				//Filter by class
+				//Filter by name
 				for (Sensor sensor : sensors) {
-					if(sensor.getClassName().equals(clas))
+					if(sensor.getName().equals(clas))
 						results.put(sensor.toJson());
 						
 				}
 				
 			} else if (clas != null && name == null) {
-				//Filter by name
+				//Filter by class
 				for (Sensor sensor : sensors) {
-					if(sensor.getName().equals(clas))
+					if(sensor.getClassName().equals(clas))
 						results.put(sensor.toJson());
 						
 				}

@@ -41,6 +41,7 @@ public class Bus {
 		}
 		List<Capteur> capteurs = new ArrayList<Capteur>();
 		JSONObject response = this.request(request);
+		System.out.println(response);
 		JSONArray arr = response.getJSONArray("results");
 		for(int i = 0; i < arr.length();i++) {
 			JSONObject cap = arr.getJSONObject(i);
