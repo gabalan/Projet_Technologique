@@ -3,11 +3,11 @@
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/BusAPI"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry exported="true" kind="lib" path="/home/norips/workspace/DriverGyro/RXTXcomm.jar">
+	<classpathentry kind="lib" path="/net/cremi/rdruon/espaces/travail/neon-workspace/RFID/RXTXcomm.jar">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="DriverGyro"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="/home/norips/Documents/FAC/ProjetTechnologique/Projet_Technologique/Bus/pkg/json-20160810.jar"/>
+	<classpathentry kind="lib" path="/autofs/netapp/travail/rdruon/Projet_Technologique/Bus/pkg/json-20160810.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
