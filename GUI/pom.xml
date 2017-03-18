@@ -15,6 +15,24 @@
           <target>1.8</target>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>java</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <mainClass>fr.projet.techno.MainWindow</mainClass>
+          <arguments>
+            <argument>127.0.0.1</argument>
+          </arguments>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
   <dependencies>
@@ -34,6 +52,16 @@
   		<groupId>org.jogamp.gluegen</groupId>
   		<artifactId>gluegen-rt-main</artifactId>
   		<version>2.3.2</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.json</groupId>
+  		<artifactId>json</artifactId>
+  		<version>20160810</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>fr.norips.BusAPI</groupId>
+  		<artifactId>BusAPI</artifactId>
+  		<version>0.0.1</version>
   	</dependency>
   </dependencies>
 </project>
