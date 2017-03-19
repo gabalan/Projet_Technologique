@@ -2,16 +2,53 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>DriverGyro</groupId>
   <artifactId>DriverGyro</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
+  <repositories>
+    <repository>
+        <id>maven-OpenNMS</id>
+        <name>Public online Restlet repository</name>
+        <url>http://repo.opennms.org/maven2/</url>
+    </repository>
+</repositories>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
+    <plugin>
+      <!-- Build an executable JAR -->
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-jar-plugin</artifactId>
+      <version>3.0.2</version>
+      <configuration>
+        <archive>
+          <manifest>
+            <addClasspath>true</addClasspath>
+            <classpathPrefix>lib/</classpathPrefix>
+            <mainClass>fr.projet.techno.Driver</mainClass>
+          </manifest>
+        </archive>
+      </configuration>
+    </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.5.1</version>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>java</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <mainClass>fr.projet.techno.Driver</mainClass>
         </configuration>
       </plugin>
     </plugins>
@@ -23,9 +60,9 @@
   		<version>20160810</version>
   	</dependency>
   	<dependency>
-  		<groupId>org.rxtx</groupId>
-  		<artifactId>rxtx</artifactId>
-  		<version>2.1.7</version>
+  		<groupId>fr.norips.BusAPI</groupId>
+  		<artifactId>BusAPI</artifactId>
+  		<version>0.0.1</version>
   	</dependency>
   </dependencies>
 </project>
