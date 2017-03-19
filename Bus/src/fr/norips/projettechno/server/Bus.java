@@ -65,7 +65,14 @@ public class Bus {
 						
 				}
 				
-			} else if(clas == null && clas == null) {
+			} else if (clas != null && name != null) {
+				//Filter by class and name ????
+				for (Sensor sensor : sensors) {
+					if(sensor.getClassName().equals(clas) && sensor.getName().equals(clas))
+						results.put(sensor.toJson());
+						
+				}
+			} else if(clas == null && name == null) {
 				//No filter
 				for (Sensor sensor : sensors) {
 					results.put(sensor.toJson());
