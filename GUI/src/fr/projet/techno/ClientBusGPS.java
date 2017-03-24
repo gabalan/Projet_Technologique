@@ -24,7 +24,12 @@ public class ClientBusGPS implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		List<Capteur> l = bus.list("GPS", null);
-		Capteur capteur = l.get(0);
+		Capteur capteur = null;
+		try {
+			capteur = l.get(0);
+		} catch (IndexOutOfBoundsException e) {
+			System.err.println("GPS can't be retrieved");
+		}
 		
 		if(capteur != null) {
 			while(true) {

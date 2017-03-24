@@ -29,13 +29,7 @@ public class MyGLEventListener implements GLEventListener,MouseMotionListener {
         rect_Y = new Rectangle(1.0f, 10.0f, 1.0f, new float[]{0.0f,1.0f,0.0f});
         rect_Z = new Rectangle(1.0f, 1.0f, 5.0f, new float[]{0.0f,0.0f,1.0f});
         rect_plane = new Rectangle(30.0f, 30.0f, 0.1f, new float[]{0.1f,0.1f,0.1f});
-        try {
-			obj = Object3D.readObject("Object2.txt");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.err.println(e);
-			e.printStackTrace();
-		}
+        
         
     }  
  

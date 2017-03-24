@@ -98,13 +98,13 @@ public class MainWindow {
         GLCanvas glCanvas = new GLCanvas(glCapabilities);
         glCanvas.setMinimumSize(new Dimension(300, 50));
         MyGLEventListener glListener = new MyGLEventListener(); 
-        Bus b;
+        Bus b = null;
 		try {
 			b = new Bus(url);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
-			return;
+			System.err.println("Unable to connect to bus at " + url);
+			System.exit(-1);
 		}
         
         new Thread(new ClientBusGyro(b, glListener)).start();
