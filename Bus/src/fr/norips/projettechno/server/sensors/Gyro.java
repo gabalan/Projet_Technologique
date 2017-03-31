@@ -4,7 +4,7 @@ public class Gyro extends Sensor {
 	private String className;
 	public Gyro(String name) {
 		super(name);
-		className = "Gyro";
+		className = "Gyroscope";
 	}
 	@Override
 	public String getClassName() {

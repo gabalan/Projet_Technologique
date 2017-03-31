@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="Android/CapteurGPS/app/src/androidTest/java"/>
+	<classpathentry kind="src" path="Android/CapteurGPS/app/src/main/java"/>
+	<classpathentry kind="src" path="Android/CapteurGPS/app/src/test/java"/>
+	<classpathentry kind="src" path="Bus/src"/>
+	<classpathentry kind="src" path="BusAPI/src"/>
+	<classpathentry kind="src" path="DriverGyro/src"/>
+	<classpathentry kind="src" path="GUI/src"/>
+	<classpathentry kind="lib" path="DriverGyro/lib/RXTXcomm.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="Bus/plugins"/>
+</classpath>

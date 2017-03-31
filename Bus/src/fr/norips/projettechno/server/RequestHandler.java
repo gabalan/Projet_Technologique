@@ -26,6 +26,7 @@ public class RequestHandler {
 					s = new Gyro(name);
 					resp = Bus.getInstance().register(s);
 				} else if (clas.equals("Accelerometer")) {
+					System.err.println("Unimplement accelerometer");
 					
 				}
 			} else if(JSONrequest.getString("type").equals("list")) {

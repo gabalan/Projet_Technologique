@@ -42,14 +42,18 @@ public class ClientBusGyro implements Runnable {
 				try {
 					JSONObject response = m.msg;
 					synchronized(glListener) {
-						glListener.angleX = response.getJSONObject("contents").getDouble("x");
-						glListener.angleY = -response.getJSONObject("contents").getDouble("y");
-						glListener.angleZ = -response.getJSONObject("contents").getDouble("z");
+						glListener.angleX = response.getDouble("x");
+						glListener.angleY = -response.getDouble("y");
+						glListener.angleZ = -response.getDouble("z");
 					}
 					long dateMsg = m.timestamp;
 					Date d = new Date();
+					Thread.sleep(100);
 					System.out.println("Latency Gyro: " + (d.getTime() - dateMsg));
 				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

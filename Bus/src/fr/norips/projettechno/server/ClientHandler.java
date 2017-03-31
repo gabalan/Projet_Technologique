@@ -24,7 +24,7 @@ public class ClientHandler implements Runnable {
 				try {
 
 					String input = i.readLine();
-					//System.out.println("Read msg :" + input);
+					System.out.println("Read msg :" + input);
 					RequestHandler req = new RequestHandler(input);
 					
 					w.println(req.execute());
