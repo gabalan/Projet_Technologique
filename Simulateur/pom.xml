@@ -38,6 +38,11 @@
   		<version>20160810</version>
   	</dependency>
   	<dependency>
+  		<groupId>org.jxmapviewer</groupId>
+  		<artifactId>jxmapviewer2</artifactId>
+  		<version>2.2</version>
+  	</dependency>
+  	<dependency>
   		<groupId>fr.norips.BusAPI</groupId>
   		<artifactId>BusAPI</artifactId>
   		<version>0.0.1</version>
