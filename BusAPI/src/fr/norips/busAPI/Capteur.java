@@ -107,6 +107,13 @@ public class Capteur {
 		request.put("type", "get_last");
 		request.put("sender_id",sender_id);
 		JSONObject response = bus.request(request);
+		
+		JSONObject ack = response.getJSONObject("ack");
+		String resp = ack.getString("resp");
+		if(resp.equals("error")) {
+			return null;
+		}
+		
 		last_message_id = response.getInt("msg_id");
 		Message m = new Message();
 		m.mId = last_message_id;

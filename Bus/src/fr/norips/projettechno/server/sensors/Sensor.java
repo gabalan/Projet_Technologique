@@ -47,6 +47,7 @@ public abstract class Sensor {
 
 	public synchronized Message getLastMsg() {
 		// TODO Auto-generated method stub
+		if(currentMsgId-1<0) return null;
 		return bufList[(currentMsgId-1)%MSG_BUFFER_SIZE];
 	}
 

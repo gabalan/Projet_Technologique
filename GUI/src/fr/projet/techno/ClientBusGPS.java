@@ -38,15 +38,17 @@ public class ClientBusGPS implements Runnable {
 			while(true) {
 				Message m = capteur.getLast();
 				try {
-					JSONObject response = m.msg;
-					synchronized(waypoint) {
-						waypoint.setPosition(new GeoPosition(response.getDouble("lat"),response.getDouble("lng")));
-						viewer.repaint();
+					if(m != null) {
+						JSONObject response = m.msg;
+						synchronized(waypoint) {
+							waypoint.setPosition(new GeoPosition(response.getDouble("lat"),response.getDouble("lng")));
+							viewer.repaint();
+						}
+						long dateMsg = m.timestamp;
+						Date d = new Date();
+						System.out.println("Latency GPS : " + (d.getTime() - dateMsg));
+						Thread.sleep(100);
 					}
-					long dateMsg = m.timestamp;
-					Date d = new Date();
-					System.out.println("Latency GPS : " + (d.getTime() - dateMsg));
-					Thread.sleep(100);
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

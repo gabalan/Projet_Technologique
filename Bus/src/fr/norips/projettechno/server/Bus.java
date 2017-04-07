@@ -116,7 +116,8 @@ public class Bus {
 		synchronized(sensors) {
 			Sensor s = sensors.get(senderId-1);
 			if(s != null) {
-				resp = Message.toJson(s.getLastMsg());
+				if(s.getLastMsg() != null)
+					resp = Message.toJson(s.getLastMsg());
 			}
 		}
 		JSONObject ack = new JSONObject();

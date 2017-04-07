@@ -75,9 +75,6 @@ public class MyGLEventListener implements GLEventListener,MouseMotionListener {
 	        gl.glRotated(angleX, 1f, 0f, 0f);
 	        gl.glRotated(angleY, 0f, 1f, 0f);
 	        gl.glRotated(angleZ, 0f, 0f, 1f);
-	        System.out.println("Angle X " + angleX);
-	        System.out.println("Angle Y " + angleY);
-	        System.out.println("Angle Z " + angleZ);
 	        rect_X.draw(gl);
 	        rect_Y.draw(gl);
 	        rect_Z.draw(gl);
