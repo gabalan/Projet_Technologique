@@ -11,6 +11,13 @@ public class Capteur {
 	private String sender_name;
 	private int last_message_id;
 	private Bus bus;
+	
+	/**
+	 * Capteur constructor, using json to create a Capteur
+	 * @param json JSON string representing capteur
+	 * @param b Bus 
+	 * @throws JSONException
+	 */
 	public Capteur(String json, Bus b) throws JSONException {
 		JSONObject obj = new JSONObject(json);
 		sender_id = obj.getInt("sender_id");
@@ -20,6 +27,12 @@ public class Capteur {
 		bus = b;
 	}
 	
+	/**
+	 * Capteur constructor. Create a Capteur using his class and name
+	 * @param sender_class Name of the class (Gyroscope, GPS...)
+	 * @param sender_name Name of the Capteur
+	 * @param b Bus
+	 */
 	public Capteur(String sender_class,String sender_name,Bus b) {
 		bus = b;
 		this.sender_class = sender_class;
@@ -28,10 +41,16 @@ public class Capteur {
 		register();
 	}
 	
+	/*
+	 * Get first message
+	 */
 	public Message getFirst() {
 		return getMessageId(last_message_id);
 	}
 	
+	/*
+	 * Register Capteur to the Bus
+	 */
 	private void register() {
 		JSONObject request = new JSONObject();
 		request.put("type", "register");
@@ -41,6 +60,11 @@ public class Capteur {
 		sender_id = response.getInt("sender_id");
 	}
 	
+	/**
+	 * Retrieve Message at ID
+	 * @param ID id of the message
+	 * @return Message
+	 */
 	private Message getMessageId(int ID) {
 		JSONObject request = new JSONObject();
 		request.put("type", "get");
@@ -55,6 +79,10 @@ public class Capteur {
 		return m;
 	}
 	
+	/**
+	 * Get next message
+	 * @return Message
+	 */
 	public Message getNext() {
 		JSONObject request = new JSONObject();
 		request.put("type", "get");
@@ -70,6 +98,10 @@ public class Capteur {
 		return m;
 	}
 	
+	/**
+	 * Get last message
+	 * @return Message
+	 */
 	public Message getLast() {
 		JSONObject request = new JSONObject();
 		request.put("type", "get_last");
@@ -83,6 +115,10 @@ public class Capteur {
 		return m;
 	}
 	
+	/**
+	 * Send contents to the Bus
+	 * @param contents JSON representing the contents
+	 */
 	public void send(JSONObject contents) {
 		JSONObject request = new JSONObject();
 		request.put("type", "send");

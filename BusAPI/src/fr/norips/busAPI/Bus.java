@@ -17,12 +17,25 @@ public class Bus {
 	Socket sockBus = null;
 	PrintWriter w;
 	BufferedReader i; 
+	/**
+	 * Constructor of Bus. Create a connection to url at port
+	 * @param url to the Bus
+	 * @param port of the Bus
+	 * @throws UnknownHostException
+	 * @throws IOException
+	 */
 	public Bus(String url, int port) throws UnknownHostException, IOException {
 		sockBus = new Socket(url, port);
 		w = new PrintWriter(sockBus.getOutputStream(),true);
 		i = new BufferedReader(new InputStreamReader(sockBus.getInputStream())); 
 	}
 	
+	/**
+	 * Constructor of Bus. Create a connection to url at port 7182
+	 * @param url
+	 * @throws UnknownHostException
+	 * @throws IOException
+	 */
 	public Bus(String url) throws UnknownHostException, IOException {
 		this(url,7182);
 	}
@@ -50,6 +63,11 @@ public class Bus {
 		return capteurs;
 	}
 	
+	/**
+	 * Send a request to the bus;
+	 * @param obj JSON object of the request
+	 * @return
+	 */
 	JSONObject request(JSONObject obj) {
 		try {
 			w.println(obj);
