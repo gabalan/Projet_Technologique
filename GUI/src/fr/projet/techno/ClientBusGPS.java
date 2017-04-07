@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.viewer.DefaultWaypoint;
 import org.jxmapviewer.viewer.GeoPosition;
 
@@ -16,9 +17,11 @@ public class ClientBusGPS implements Runnable {
 	
 	private Bus bus;
 	DefaultWaypoint waypoint;
-	public ClientBusGPS(Bus _b,DefaultWaypoint _waypoint) {
+	JXMapViewer viewer;
+	public ClientBusGPS(Bus _b,DefaultWaypoint _waypoint,JXMapViewer _viewer) {
 		bus = _b;
 		waypoint = _waypoint;
+		viewer = _viewer;
 	}
 	@Override
 	public void run() {
@@ -38,6 +41,7 @@ public class ClientBusGPS implements Runnable {
 					JSONObject response = m.msg;
 					synchronized(waypoint) {
 						waypoint.setPosition(new GeoPosition(response.getDouble("lat"),response.getDouble("lng")));
+						viewer.repaint();
 					}
 					long dateMsg = m.timestamp;
 					Date d = new Date();

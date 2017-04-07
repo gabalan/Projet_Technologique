@@ -284,7 +284,7 @@ public class MainWindow {
 		//######### PANEL GPS #############
 		JPanel panel_GPS = new JPanel();
 		tabbedPane.addTab("GPS", null, panel_GPS, null);
-		JXMapViewer mapViewer = new JXMapViewer();
+		final JXMapViewer mapViewer = new JXMapViewer();
 
 		// Create a TileFactoryInfo for OpenStreetMap
 		TileFactoryInfo info = new OSMTileFactoryInfo();
@@ -348,7 +348,7 @@ public class MainWindow {
 		MapClickListenerLabel sa = new MapClickListenerLabel(mapViewer,lblLat,lblLong,defaultWaypoint); 
 		mapViewer.addMouseListener(sa); 
 		mapViewer.addMouseMotionListener(sa); 
-		new Thread(new ClientBusGPS(b, defaultWaypoint)).start();
+		new Thread(new ClientBusGPS(b, defaultWaypoint, mapViewer)).start();
         
         
         frame.setMinimumSize(new Dimension(600, 500));
