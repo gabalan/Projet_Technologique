@@ -11,12 +11,17 @@ public abstract class Sensor {
 	private Message bufList[] = new Message[MSG_BUFFER_SIZE];
 	private String name;
 	
+	/**
+	 * Constructor of Sensor. 
+	 * @param name of the sensor.
+	 */
 	protected Sensor(String name) {
 		this.name = name;
 		currentMsgId = 0;
 		id = -1;
 	}
 
+	
 	public void setId(int id) {
 		this.id = id;
 		
@@ -44,14 +49,21 @@ public abstract class Sensor {
 		return obj;
 	}
 
-
+	/**
+	 * Gets last message on the bus 
+	 * @return bufList 
+	 */
 	public synchronized Message getLastMsg() {
 		// TODO Auto-generated method stub
 		if(currentMsgId-1<0) return null;
 		return bufList[(currentMsgId-1)%MSG_BUFFER_SIZE];
 	}
 
-
+	/**
+	 * Returns message associated to msg_id 
+	 * @param msg_id message id.
+	 * @return bufList
+	 */
 	public synchronized Message getMsg(int msg_id) {
 		if(msg_id < currentMsgId-MSG_BUFFER_SIZE) {
 			return bufList[(currentMsgId-MSG_BUFFER_SIZE)%MSG_BUFFER_SIZE];
@@ -63,7 +75,11 @@ public abstract class Sensor {
 		}
 	}
 
-
+	/**
+	 * Concatenates the message passed as parameter to bufList
+	 * @param msg
+	 * @return bufList
+	 */
 	public synchronized void addMsg(Message msg) {
 		msg.mId = currentMsgId;
 		bufList[(currentMsgId++)%MSG_BUFFER_SIZE] = msg;

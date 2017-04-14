@@ -8,7 +8,7 @@ import fr.norips.projettechno.server.sensors.*;
 
 import org.json.*;
 public class Bus {
-	/** Constructeur privé, singleton */	
+	/** Private constructor, singleton */	
 	private AtomicInteger counter = new AtomicInteger();
 	private List<Sensor> sensors;
 	private Bus()
@@ -19,17 +19,21 @@ public class Bus {
 	/** Holder */
 	private static class BusHolder
 	{		
-		/** Instance unique non préinitialisée */
+		/** Unique instance none Pre-initialized*/
 		private final static Bus instance = new Bus();
 	}
  
-	/** Point d'accès pour l'instance unique du singleton */
+	/** Access point of the unique singleton*/
 	public static Bus getInstance()
 	{
 		return BusHolder.instance;
 	}
 	
-	
+	/**
+	 * Sends a connexion request to the bus.
+	 * @param s Sensor.
+	 * @return resp returns the new assigned ID.
+	 */
 	
 	public JSONObject register(Sensor s) {
 		int newId = counter.incrementAndGet();
@@ -46,6 +50,12 @@ public class Bus {
 		return resp;
 	}
 	
+	/**
+	 * Lists all the sensors connected to the bus.
+	 * @param clas name of the sensor's class.
+	 * @param name name of the sensor.
+	 * @return resp returns list af all the senors
+	 */
 	public JSONObject list(String clas, String name) {
 		JSONArray results = new JSONArray();
 		synchronized(sensors) {
@@ -61,7 +71,7 @@ public class Bus {
 				//Filter by class
 				for (Sensor sensor : sensors) {
 					if(sensor.getClassName().equals(clas))
-						results.put(sensor.toJson());
+						results.put(sensor.toJsPermet de lister les capteurs présents sur le buson());
 						
 				}
 				
@@ -71,7 +81,8 @@ public class Bus {
 					if(sensor.getClassName().equals(clas) && sensor.getName().equals(clas))
 						results.put(sensor.toJson());
 						
-				}
+				}	 * Send a request to the bus;
+
 			} else if(clas == null && name == null) {
 				//No filter
 				for (Sensor sensor : sensors) {
@@ -86,10 +97,16 @@ public class Bus {
 		JSONObject ack = new JSONObject();
 		ack.put("resp", "ok");
 		resp.put("ack", ack);
-		return resp;
+		return resp;https://www.mkyong.com/java/how-do-convert-java-object-to-from-json-format-gson-api/
 		
 	}
 	
+	/**
+	 * Sends a message to the bus.
+	 * @param senderId sensor's ID.
+	 * @param m list of the sensor's attributes depending on its class.
+	 * @return resp acknowledgement receipt "ok" in case of a success "error" otherwise.
+	 */
 	public JSONObject send(int senderId, Message m) {
 		boolean err = true;
 		synchronized(sensors) {
@@ -111,6 +128,11 @@ public class Bus {
 		return resp;
 	}
 	
+	/**
+	 * Get last message sent on the bus.
+	 * @param senderId sensor's ID.
+	 * @return resp Last message + dacknowledgement receipt "ok" in case of a success "error" otherwise.
+	 */
 	public JSONObject get_last(int senderId) {
 		JSONObject resp = null;
 		synchronized(sensors) {

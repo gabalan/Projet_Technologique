@@ -19,7 +19,7 @@ public class Bus {
 	BufferedReader i; 
 	/**
 	 * Constructor of Bus. Create a connection to url at port
-	 * @param url to the Bus
+	 * @param url or ip address of the Bus
 	 * @param port of the Bus
 	 * @throws UnknownHostException
 	 * @throws IOException
