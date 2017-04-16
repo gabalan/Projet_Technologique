@@ -97,7 +97,7 @@ public class Bus {
 		JSONObject ack = new JSONObject();
 		ack.put("resp", "ok");
 		resp.put("ack", ack);
-		return resp;https://www.mkyong.com/java/how-do-convert-java-object-to-from-json-format-gson-api/
+		return resp;
 		
 	}
 	
@@ -131,7 +131,7 @@ public class Bus {
 	/**
 	 * Get last message sent on the bus.
 	 * @param senderId sensor's ID.
-	 * @return resp Last message + dacknowledgement receipt "ok" in case of a success "error" otherwise.
+	 * @return resp Last message + acknowledgement receipt "ok" in case of a success "error" otherwise.
 	 */
 	public JSONObject get_last(int senderId) {
 		JSONObject resp = null;
