@@ -81,8 +81,7 @@ public class Bus {
 					if(sensor.getClassName().equals(clas) && sensor.getName().equals(clas))
 						results.put(sensor.toJson());
 						
-				}	 * Send a request to the bus;
-
+				}	 
 			} else if(clas == null && name == null) {
 				//No filter
 				for (Sensor sensor : sensors) {
