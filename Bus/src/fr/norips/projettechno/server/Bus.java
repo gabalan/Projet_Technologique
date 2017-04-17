@@ -49,7 +49,7 @@ public class Bus {
 		resp.put("ack", ack);
 		return resp;
 	}
-	
+
 	/**
 	 * Lists all the sensors connected to the bus.
 	 * @param clas name of the sensor's class.
@@ -71,7 +71,7 @@ public class Bus {
 				//Filter by class
 				for (Sensor sensor : sensors) {
 					if(sensor.getClassName().equals(clas))
-						results.put(sensor.toJsPermet de lister les capteurs présents sur le buson());
+						results.put(sensor.toJson()); 
 						
 				}
 				
