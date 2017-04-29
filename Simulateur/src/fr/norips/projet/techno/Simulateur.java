@@ -193,6 +193,11 @@ public class Simulateur {
 				try {
 					b = new Bus(url);
 					cGyro = new Capteur("Gyroscope", "SimuGyro", b);
+					JSONObject contents = new JSONObject();
+					contents.put("x", Double.toString(0.0d));
+					contents.put("y", Double.toString(0.0d));
+					contents.put("z", Double.toString(0.0d));
+					cGyro.send(contents);
 				} catch (UnknownHostException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
