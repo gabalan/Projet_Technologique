@@ -107,7 +107,6 @@ public class MainWindow {
 			System.exit(-1);
 		}
         
-        new Thread(new ClientBusGyro(b, glListener)).start();
         
         
         glCanvas.addMouseMotionListener(glListener);
@@ -117,7 +116,7 @@ public class MainWindow {
         
         
         
-        ChangeListener listenerX = new ChangeListener() {
+        /*ChangeListener listenerX = new ChangeListener() {
       	  public void stateChanged(ChangeEvent e) {
       		  JSpinner mySpinner = (JSpinner)(e.getSource());
       		  if( mySpinner.getModel() instanceof SpinnerNumberModel) {
@@ -144,6 +143,7 @@ public class MainWindow {
     		  }
     	  }
     	};
+    	*/
         SpinnerModel spinnerMod = new SpinnerNumberModel(0, -360, 360, 1);
         
         
@@ -223,7 +223,7 @@ public class MainWindow {
         JLabel lblRotX = new JLabel("Rotation X");
         panel_x.add(lblRotX);
         JSpinner spinner_x = new JSpinner(new SpinnerNumberModel(0, -360, 360, 1));
-        spinner_x.addChangeListener(listenerX);
+        //spinner_x.addChangeListener(listenerX);
         panel_x.add(spinner_x);
         
         JPanel panel_y = new JPanel();
@@ -234,7 +234,7 @@ public class MainWindow {
         panel_y.add(lblRotY);
         
         JSpinner spinner_y = new JSpinner(new SpinnerNumberModel(0, -360, 360, 1));
-        spinner_y.addChangeListener(listenerY);
+        //spinner_y.addChangeListener(listenerY);
         panel_y.add(spinner_y);
         
         JPanel panel_z = new JPanel();
@@ -245,8 +245,11 @@ public class MainWindow {
         panel_z.add(lblRotZ);
         
         JSpinner spinner_z = new JSpinner(new SpinnerNumberModel(0, -360, 360, 1));
-        spinner_z.addChangeListener(listenerZ);
+        //spinner_z.addChangeListener(listenerZ);
         panel_z.add(spinner_z);
+        
+
+        new Thread(new ClientBusGyro(b, glListener, spinner_x, spinner_y, spinner_z)).start();
         
         JPanel panel_accelMod = new JPanel();
         panelTwo.add(panel_accelMod);
@@ -348,7 +351,7 @@ public class MainWindow {
 		MapClickListenerLabel sa = new MapClickListenerLabel(mapViewer,lblLat,lblLong,defaultWaypoint); 
 		mapViewer.addMouseListener(sa); 
 		mapViewer.addMouseMotionListener(sa); 
-		new Thread(new ClientBusGPS(b, defaultWaypoint, mapViewer)).start();
+		new Thread(new ClientBusGPS(b, defaultWaypoint, mapViewer,lblLat,lblLong)).start();
         
         
         frame.setMinimumSize(new Dimension(600, 500));
