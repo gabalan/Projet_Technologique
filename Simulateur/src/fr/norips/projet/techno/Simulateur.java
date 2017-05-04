@@ -18,8 +18,8 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
-import fr.norips.busAPI.Bus;
-import fr.norips.busAPI.Capteur;
+import fr.norips.busAPI.*;
+
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -38,6 +38,7 @@ import java.util.Set;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.MouseInputListener;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.OSMTileFactoryInfo;
@@ -64,7 +65,7 @@ public class Simulateur {
 	private final Action action = new SwingAction();
 	
 	private Bus b = null;
-	private Capteur cGyro = null;
+	private Gyroscope cGyro = null;
 	double valX=0,valY=0,valZ=0;
 	private JTextField tfGPSServer;
 
@@ -98,10 +99,10 @@ public class Simulateur {
 	private void sendGyroInfo() {
 		if(cGyro == null) return;
 		JSONObject contents = new JSONObject();
-		contents.put("x", Double.toString(valX));
-		contents.put("y", Double.toString(valY));
-		contents.put("z", Double.toString(valZ));
-		cGyro.send(contents);
+		cGyro.setX(valX);
+		cGyro.setY(valY);
+		cGyro.setZ(valZ);
+		cGyro.send();
 	}
 	private void initialize() {
 		frame = new JFrame();
@@ -192,17 +193,15 @@ public class Simulateur {
 				
 				try {
 					b = new Bus(url);
-					cGyro = new Capteur("Gyroscope", "SimuGyro", b);
-					JSONObject contents = new JSONObject();
-					contents.put("x", Double.toString(0.0d));
-					contents.put("y", Double.toString(0.0d));
-					contents.put("z", Double.toString(0.0d));
-					cGyro.send(contents);
+					cGyro = new Gyroscope("Gyroscope", "SimuGyro", b);
+					cGyro.send();
 				} catch (UnknownHostException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (JSONException e1){
 					e1.printStackTrace();
 				}
 			}
@@ -279,7 +278,7 @@ public class Simulateur {
 				
 				try {
 					Bus b = new Bus(url);
-					Capteur cGPS = new Capteur("GPS", "SimuGPS", b);
+					GPS cGPS = new GPS("GPS", "SimuGPS", b);
 					sa.setCapteur(cGPS);
 				} catch (UnknownHostException e1) {
 					// TODO Auto-generated catch block

@@ -9,7 +9,7 @@ import fr.norips.busAPI.*;
 
 public class MapClickListenerSend extends MapClickListener {
 	private DefaultWaypoint pos;
-	private Capteur c;
+	private GPS c;
 	public MapClickListenerSend(JXMapViewer viewer,DefaultWaypoint pos) {
 		super(viewer);
 		c = null;
@@ -20,22 +20,19 @@ public class MapClickListenerSend extends MapClickListener {
 	public void mapClicked(GeoPosition location) {
 		// TODO Auto-generated method stub
 		if(c != null) {
-			JSONObject obj = new JSONObject();
-	        try {
-	            obj.put("lat", location.getLatitude());
-	            obj.put("lng", location.getLongitude());
-	        }catch (JSONException e) {
-	            e.printStackTrace();
-	            return;
-	        }
-
-			c.send(obj);
+			try {
+				c.setLat(location.getLatitude());
+				c.setLon(location.getLongitude());
+				c.send();
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
 		}
 		pos.setPosition(location);
 		viewer.updateUI();
 	}
 	
-	public void setCapteur(Capteur _c) {
+	public void setCapteur(GPS _c) {
 		c=_c;
 	}
 
